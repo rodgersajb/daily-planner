@@ -38,8 +38,11 @@ const LogIn = () => {
          <div className="wrapper">
  
   <form action="" onSubmit={handleOnSubmit}>
-  <span className="daily-planner"><h3>Daily Planner</h3></span>
-    <div className="container">
+    <div className="planner-container">
+
+    <h3>Daily Planner</h3>
+    </div>
+    <div className="form-container">
       <div className="input">
         <FontAwesomeIcon icon="fa-solid fa-envelope" />
         <input type={"email"}  onChange={(event) => setEmail(event.target.value)} placeholder="Email" />
