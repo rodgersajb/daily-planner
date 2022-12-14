@@ -3,6 +3,7 @@ import './Fontawesome'
 import firebase from './firebase'
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { FontAwesomeIcon, } from '@fortawesome/react-fontawesome';
+import './Login.scss'
 
 const LogIn = () => {
     const auth = getAuth(firebase);

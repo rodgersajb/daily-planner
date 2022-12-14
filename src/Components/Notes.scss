@@ -1,0 +1,27 @@
+.span-2-col {
+    grid-column: span 2;
+}
+
+.notes {
+    border: 6px solid #6f204d;
+    padding: 0;
+    border-radius: 2rem;
+    margin: 0;
+    overflow: hidden;
+
+
+
+    h2 {
+        background-color: rgb(255, 184, 76);
+        color: #6f204d;
+        text-align: center;
+        text-transform: uppercase;
+        padding: 20px 0;
+        margin: 0;
+    }
+
+    .notes-background {
+        background-color: #fff;
+        height: 400px;
+    }
+}

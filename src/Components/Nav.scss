@@ -1,0 +1,52 @@
+.nav-wrapper {
+    width: 99%;
+    margin: 0 auto;
+    max-width: 1850px;
+
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        width: 100%;
+
+        .burger {
+            display: flex;
+            flex-direction: column;
+
+            span {
+
+                background-color: #6f204d;
+                height: 6px;
+                width: 50px;
+                border-radius: 4px;
+
+
+                margin: 6px 0;
+            }
+        }
+
+        h1 {
+            color: #6f204d;
+            text-transform: uppercase;
+            font-size: 4rem;
+            margin-left: 20rem;
+
+        }
+
+        .date {
+            background-color: rgb(179, 143, 251);
+            border: 4px solid #6f204d;
+            color: #6f204d;
+            padding: 15px 0 15px 15px;
+            border-radius: 50px 50px 0 50px;
+
+            font-size: 1.4rem;
+            width: 10rem;
+            text-align: center;
+            font-weight: bold;
+
+        }
+
+    }
+}
