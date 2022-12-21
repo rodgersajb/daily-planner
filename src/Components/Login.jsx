@@ -35,6 +35,7 @@ const LogIn = () => {
     }
 
     return (
+      
          <div className="wrapper">
  
   <form action="" onSubmit={handleOnSubmit}>
