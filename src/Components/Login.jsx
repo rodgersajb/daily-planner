@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { Navigate } from 'react-router-dom';
 import './Fontawesome'
 import firebase from './firebase'
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import {  createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { FontAwesomeIcon, } from '@fortawesome/react-fontawesome';
 import './Login.scss'
 
@@ -11,8 +12,12 @@ const LogIn = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("")
     const [user, setUser] = useState([])
+    const [currentUser, setCurrentUser] = useState([])
+    const [loggedIn, setLoggedIn] = useState(false)
 
     const signUp = () => {
+
+  
 
     createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
@@ -30,12 +35,51 @@ const LogIn = () => {
     });
     }
 
+    const signIn = () => {
+      const auth = getAuth(firebase);
+      
+      signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        setCurrentUser(userCredential.user)
+      
+      
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        alert(errorCode);
+      })
+
+    }
+
+    const authenticateUser = () => {
+      // determine if user is logged in
+      onAuthStateChanged(auth, (currentUser) => {
+        if (currentUser) {
+          setLoggedIn(true)
+          const uid = currentUser.uid;
+          
+        }
+        else {
+          setLoggedIn(false)
+        }
+      })
+    }
+
+    useEffect(() => {
+      if (!loggedIn) {
+        authenticateUser();
+      }
+    }, [loggedIn])
+  
+
     const handleOnSubmit = (event) => {
         event.preventDefault();
     }
 
     return (
+      loggedIn ? <Navigate to="/Home" replace={true}/> :
       
+    
          <div className="wrapper">
  
   <form action="" onSubmit={handleOnSubmit}>
@@ -65,12 +109,13 @@ const LogIn = () => {
       <div className="button">
 
         <button onClick={signUp}>Sign Up</button>
-        <button>Sign In</button>
+        <button onClick={signIn}>Sign In</button>
       </div>
 
 
     </div>
   </form>
+  
 
   
  </div>
