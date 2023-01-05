@@ -1,13 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Navigate } from 'react-router-dom';
 import './Fontawesome'
 import firebase from './firebase'
-import {  createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import {  createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, getAuth } from "firebase/auth";
 import { FontAwesomeIcon, } from '@fortawesome/react-fontawesome';
-import './Login.scss'
+import './SignUp.scss'
 
-const LogIn = () => {
-    const auth = getAuth(firebase);
+const SignUp = () => {
+    
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("")
@@ -16,13 +16,14 @@ const LogIn = () => {
     const [loggedIn, setLoggedIn] = useState(false)
 
     const signUp = () => {
-
+    
   
-
+    const auth = getAuth();
     createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in 
     setUser(userCredential.user);
+    
     console.log(user)
     
       // ...
@@ -51,25 +52,7 @@ const LogIn = () => {
 
     }
 
-    const authenticateUser = () => {
-      // determine if user is logged in
-      onAuthStateChanged(auth, (currentUser) => {
-        if (currentUser) {
-          setLoggedIn(true)
-          const uid = currentUser.uid;
-          
-        }
-        else {
-          setLoggedIn(false)
-        }
-      })
-    }
-
-    useEffect(() => {
-      if (!loggedIn) {
-        authenticateUser();
-      }
-    }, [loggedIn])
+ 
   
 
     const handleOnSubmit = (event) => {
@@ -77,7 +60,7 @@ const LogIn = () => {
     }
 
     return (
-      loggedIn ? <Navigate to="/Home" replace={true}/> :
+      // loggedIn ? <Navigate to="/Home" replace={true}/> :
       
     
          <div className="wrapper">
@@ -122,4 +105,4 @@ const LogIn = () => {
     )
 }
 
-export default LogIn
+export default SignUp;
