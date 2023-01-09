@@ -15,7 +15,6 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState([]);
-  const [currentUser, setCurrentUser] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
 
   const handleSignUp = () => {
@@ -45,7 +44,7 @@ const SignUp = () => {
     // loggedIn ? <Navigate to="/Home" replace={true}/> :
 
     <div className="wrapper">
-      <form action="" onSubmit={handleSignUp}>
+      <form action="" onSubmit={handleOnSubmit}>
         <div className="planner-container">
           <h3>Daily Planner</h3>
         </div>
@@ -78,7 +77,7 @@ const SignUp = () => {
             <span className="underline"></span>
           </div>
           <div className="button">
-            <button onClick={handleOnSubmit}>Sign Up</button>
+            <button onClick={handleSignUp}>Sign Up</button>
           </div>
         </div>
       </form>

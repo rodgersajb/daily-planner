@@ -5,6 +5,7 @@ import Notes from "./Notes";
 import "./Home.scss";
 import Nav from "./Nav";
 
+
 const Home = () => {
   return (
     <>

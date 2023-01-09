@@ -12,10 +12,10 @@ const SignIn = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const auth = getAuth(firebase);
 
   const { currentUser, setCurrentUser } = useContext(AuthContext);
   const handleSignIn = () => {
+    const auth = getAuth(firebase);
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         setCurrentUser(userCredential.user);
@@ -24,19 +24,18 @@ const SignIn = () => {
         const errorCode = error.code;
         alert(errorCode);
       });
-
-    const authenticateUser = () => {
-      // determine if user is logged in
-      const auth = getAuth(firebase);
-      onAuthStateChanged(auth, (currentUser) => {
-        if (currentUser) {
-          setLoggedIn(true);
-          const uid = currentUser.uid;
-        } else {
-          setLoggedIn(false);
-        }
-      });
-    };
+  };
+  const authenticateUser = () => {
+    // determine if user is logged in
+    const auth = getAuth(firebase);
+    onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser) {
+        setLoggedIn(true);
+        const uid = currentUser.uid;
+      } else {
+        setLoggedIn(false);
+      }
+    });
   };
 
   useEffect(() => {
