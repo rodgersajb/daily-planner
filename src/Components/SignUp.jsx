@@ -30,7 +30,7 @@ const SignUp = () => {
     })
     .catch((error) => {
         const errorCode = error.code;
-      // const errorMessage = error.message;
+      const errorMessage = error.message;
         alert(errorCode)
       // ..
     });
@@ -92,7 +92,7 @@ const SignUp = () => {
       <div className="button">
 
         <button onClick={signUp}>Sign Up</button>
-        <button onClick={signIn}>Sign In</button>
+        
       </div>
 
 

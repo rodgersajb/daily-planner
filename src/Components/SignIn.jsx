@@ -1,7 +1,13 @@
 import { AuthContext } from "../Contexts/AuthContext";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { Navigate } from "react-router-dom";
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import firebase from "./firebase";
+import { FontAwesomeIcon, } from '@fortawesome/react-fontawesome';
 const SignIn = () => {
-      const signIn = () => {
+    const [loggedIn, setLoggedIn] = useState(false);
+    const [email, setEmail] = useState("")
+    const [ password, setPassword] = useState("");
       const auth = getAuth(firebase);
       
       signInWithEmailAndPassword(auth, email, password)
@@ -12,10 +18,10 @@ const SignIn = () => {
       })
       .catch((error) => {
         const errorCode = error.code;
-        alert(errorCode);
+        // alert(errorCode);
       })
 
-    }
+    
        const authenticateUser = () => {
       // determine if user is logged in
       const auth = getAuth(firebase);
@@ -46,6 +52,27 @@ const SignIn = () => {
 
     }
 
+    return (
+        <div className="form">
+            <h3>Daily Planner</h3>
+            <form action="" >
+                <FontAwesomeIcon icon="fa-solid fa-envelope" />
+                <input type={"email"}  onChange={(event) => setEmail(event.target.value)} placeholder="Email" />
+                <span className="underline"></span>
+                <FontAwesomeIcon icon="fa-solid fa-lock" />
+                <input type="password"  onChange={(event) => setPassword(event.target.value)} placeholder="Password"/>
+                <span className="underline"></span>
+                <FontAwesomeIcon icon="fa-solid fa-lock" />     
+                <input type="text" onChange={(event) => event.target.value} placeholder="Confirm password" />
+                <span className="underline"></span>
+                <button>Sign In</button>
+                
+
+            </form>
+        </div>
+
+    )
 }
+
 
 export default SignIn;
