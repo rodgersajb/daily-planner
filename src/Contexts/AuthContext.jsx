@@ -3,7 +3,6 @@ import { useState, useEffect, createContext } from "react";
 import firebase from "../Components/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 
-
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -11,16 +10,17 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const auth = getAuth(firebase);
-    auth.onAuthStateChanged(setCurrentUser)
+    auth.onAuthStateChanged(setCurrentUser);
   }, []);
 
   return (
     <AuthContext.Provider
       value={{
-        currentUser
+        currentUser,
+        setCurrentUser,
       }}
-      >
-        {children}
-      </AuthContext.Provider>
+    >
+      {children}
+    </AuthContext.Provider>
   );
 };

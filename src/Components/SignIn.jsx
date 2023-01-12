@@ -12,6 +12,7 @@ const SignIn = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [userId, setUserId] = useState(null);
 
   const { currentUser, setCurrentUser } = useContext(AuthContext);
   const handleSignIn = () => {
@@ -30,12 +31,23 @@ const SignIn = () => {
     const auth = getAuth(firebase);
     onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
+        console.log(currentUser, "THIS IS THE CURRENT USER");
+        <Navigate to="/Home" />;
         setLoggedIn(true);
         const uid = currentUser.uid;
+        setUserId(uid);
       } else {
         setLoggedIn(false);
       }
     });
+  };
+
+  const handleClick = (event) => {
+    event.preventDefault();
+  };
+
+  const handleUserSignUp = () => {
+    <Navigate to="/Signup" />;
   };
 
   useEffect(() => {
@@ -53,7 +65,7 @@ const SignIn = () => {
   return (
     <div className="form">
       <h3>Daily Planner</h3>
-      <form action="" onSubmit={handleSignIn}>
+      <form action="" onSubmit={handleClick}>
         <FontAwesomeIcon icon="fa-solid fa-envelope" />
         <input
           type={"email"}
@@ -75,8 +87,12 @@ const SignIn = () => {
           placeholder="Confirm password"
         />
         <span className="underline"></span>
-        <button>Sign In</button>
+        <button onClick={handleSignIn}>Sign In</button>
       </form>
+      <p>
+        Don't have an account?
+        <button onClick={handleUserSignUp}>Sign up!</button>
+      </p>
     </div>
   );
 };

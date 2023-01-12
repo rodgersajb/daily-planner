@@ -4,8 +4,6 @@ import "./Fontawesome";
 import firebase from "./firebase";
 import {
   createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
   getAuth,
 } from "firebase/auth";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -15,16 +13,17 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState([]);
-  const [loggedIn, setLoggedIn] = useState(false);
 
   const handleSignUp = () => {
-    const auth = getAuth();
+    const auth = getAuth(firebase);
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
         setUser(userCredential.user);
+        // setLoggedIn(true);
 
         console.log(user);
+        alert("Successfully signed up!");
 
         // ...
       })
@@ -41,8 +40,6 @@ const SignUp = () => {
   };
 
   return (
-    // loggedIn ? <Navigate to="/Home" replace={true}/> :
-
     <div className="wrapper">
       <form action="" onSubmit={handleOnSubmit}>
         <div className="planner-container">
@@ -70,7 +67,7 @@ const SignUp = () => {
           <div className="input">
             <FontAwesomeIcon icon="fa-solid fa-lock" />
             <input
-              type="text"
+              type="password"
               onChange={(event) => event.target.value}
               placeholder="Confirm password"
             />
