@@ -1,11 +1,8 @@
 import { useState, useEffect, useCallback } from "react";
-import { Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Fontawesome";
 import firebase from "./firebase";
-import {
-  createUserWithEmailAndPassword,
-  getAuth,
-} from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./SignUp.scss";
 
@@ -58,7 +55,7 @@ const SignUp = () => {
           <div className="input">
             <FontAwesomeIcon icon="fa-solid fa-lock" />
             <input
-              type="text"
+              type="password"
               onChange={(event) => setPassword(event.target.value)}
               placeholder="Password"
             />
@@ -77,6 +74,9 @@ const SignUp = () => {
             <button onClick={handleSignUp}>Sign Up</button>
           </div>
         </div>
+        <p>
+          Already have an account? <Link to="/">Sign In</Link>
+        </p>
       </form>
     </div>
   );

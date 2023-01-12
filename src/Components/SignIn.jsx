@@ -1,6 +1,6 @@
 import { AuthContext } from "../Contexts/AuthContext";
 import { useEffect, useState, useContext } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, Link } from "react-router-dom";
 import {
   getAuth,
   signInWithEmailAndPassword,
@@ -15,6 +15,7 @@ const SignIn = () => {
   const [userId, setUserId] = useState(null);
 
   const { currentUser, setCurrentUser } = useContext(AuthContext);
+
   const handleSignIn = () => {
     const auth = getAuth(firebase);
     signInWithEmailAndPassword(auth, email, password)
@@ -46,17 +47,15 @@ const SignIn = () => {
     event.preventDefault();
   };
 
-  const handleUserSignUp = () => {
-    <Navigate to="/Signup" />;
-  };
+  // const handleUserSignUp = () => {
+  //   <Navigate to="/Signup" />;
+  // };
 
   useEffect(() => {
     if (!loggedIn) {
       authenticateUser();
     }
   }, [loggedIn]);
-
-  console.log({ currentUser }, "hey");
 
   if (currentUser) {
     return <Navigate to="/Home" />;
@@ -80,18 +79,11 @@ const SignIn = () => {
           placeholder="Password"
         />
         <span className="underline"></span>
-        <FontAwesomeIcon icon="fa-solid fa-lock" />
-        <input
-          type="text"
-          onChange={(event) => event.target.value}
-          placeholder="Confirm password"
-        />
-        <span className="underline"></span>
+
         <button onClick={handleSignIn}>Sign In</button>
       </form>
       <p>
-        Don't have an account?
-        <button onClick={handleUserSignUp}>Sign up!</button>
+        Don't have an account? <Link to="/Signup">Sign Up</Link>
       </p>
     </div>
   );

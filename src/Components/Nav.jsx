@@ -5,15 +5,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Navigate } from "react-router-dom";
 import { signOut, getAuth } from "firebase/auth";
 import firebase from "./firebase";
+import SignIn from "./SignIn";
 
 const Nav = () => {
   const [date, setDate] = useState([]);
   const { currentUser, setCurrentUser } = useContext(AuthContext);
-  const [loggedIn, setLoggedIn] = useState(true);
 
-  if (currentUser === null) {
-    return <Navigate to="/" />;
-  }
+  console.log(currentUser, "current user");
+
   useEffect(() => {
     let theDate = new Date();
     setDate(theDate);
@@ -22,10 +21,12 @@ const Nav = () => {
   const handleSignOut = async () => {
     const auth = getAuth(firebase);
     await signOut(auth);
-    <Navigate to="/" />;
+    setCurrentUser(null);
+    <Navigate to="/" element={<SignIn />} />;
   };
 
   return (
+    currentUser === null ? <Navigate to ="/"/> :
     <>
       <div className="nav-wrapper">
         <nav>
