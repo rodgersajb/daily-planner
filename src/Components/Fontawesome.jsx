@@ -5,6 +5,7 @@ import {
   faUser,
   faKey,
   faRightFromBracket,
+  faSignature,
 } from "@fortawesome/free-solid-svg-icons";
 
-library.add(faEnvelope, faLock, faUser, faKey, faRightFromBracket);
+library.add(faEnvelope, faLock, faUser, faKey, faRightFromBracket, faSignature);

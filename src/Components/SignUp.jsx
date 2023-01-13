@@ -1,7 +1,8 @@
 import { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import "./Fontawesome";
-import firebase from "./firebase";
+import { firebase, db } from "./firebase";
+import { set, ref } from "firebase/database";
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./SignUp.scss";
@@ -9,21 +10,26 @@ import "./SignUp.scss";
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [user, setUser] = useState([]);
+  const [name, setName] = useState("");
 
   const handleSignUp = () => {
     const auth = getAuth(firebase);
     createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
+      .then((response) => {
+        const user = response.user;
+
         // Signed in
-        setUser(userCredential.user);
-        // setLoggedIn(true);
 
         console.log(user);
         alert("Successfully signed up!");
+        set(ref(db, "users/" + user.uid), {
+          email: email,
+          name: user.displayName,
+        });
 
         // ...
       })
+
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
@@ -43,6 +49,15 @@ const SignUp = () => {
           <h3>Daily Planner</h3>
         </div>
         <div className="form-container">
+          <div className="input">
+            <FontAwesomeIcon icon="fa-solid fa-signature" />
+            <input
+              type={"text"}
+              onChange={(event) => setName(event.target.value)}
+              placeholder="name"
+            />
+            <span className="underline"></span>
+          </div>
           <div className="input">
             <FontAwesomeIcon icon="fa-solid fa-envelope" />
             <input

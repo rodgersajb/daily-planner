@@ -6,7 +6,7 @@ import {
   signInWithEmailAndPassword,
   onAuthStateChanged,
 } from "firebase/auth";
-import firebase from "./firebase";
+import { firebase } from "./firebase";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const SignIn = () => {
   const [loggedIn, setLoggedIn] = useState(false);

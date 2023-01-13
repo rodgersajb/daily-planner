@@ -4,7 +4,7 @@ import { AuthContext } from "../Contexts/AuthContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Navigate } from "react-router-dom";
 import { signOut, getAuth } from "firebase/auth";
-import firebase from "./firebase";
+import { firebase } from "./firebase";
 import SignIn from "./SignIn";
 
 const Nav = () => {
@@ -25,8 +25,9 @@ const Nav = () => {
     <Navigate to="/" element={<SignIn />} />;
   };
 
-  return (
-    currentUser === null ? <Navigate to ="/"/> :
+  return currentUser === null ? (
+    <Navigate to="/" />
+  ) : (
     <>
       <div className="nav-wrapper">
         <nav>
