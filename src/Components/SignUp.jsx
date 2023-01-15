@@ -6,6 +6,7 @@ import { set, ref } from "firebase/database";
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./SignUp.scss";
+import { validateEmail } from "./ValidateEmail";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -40,6 +41,11 @@ const SignUp = () => {
 
   const handleOnSubmit = (event) => {
     event.preventDefault();
+
+      !validateEmail ? alert("Please enter a valid email") : true;
+    // !validateEmail ? alert('enter a proper email!) or invoke code
+    // if not validate, you're wrong!
+    // if validate, you're validated!
   };
 
   return (

@@ -10,15 +10,10 @@
 
     width: 100%;
 
-    .burger {
-      display: flex;
-      flex-direction: column;
-
-      span {
-        background-color: #6f204d;
-        height: 6px;
-        width: 50px;
-        border-radius: 4px;
+    .plus {
+      .fa-plus {
+        font-size: 2rem;
+        color: #6f204d;
 
         margin: 6px 0;
       }

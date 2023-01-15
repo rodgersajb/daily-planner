@@ -6,6 +6,10 @@ import { Navigate } from "react-router-dom";
 import { signOut, getAuth } from "firebase/auth";
 import { firebase } from "./firebase";
 import SignIn from "./SignIn";
+import Priorities from "./Priorities";
+import Reminders from "./Reminders";
+import ToDo from "./ToDo";
+import Notes from "./Notes";
 
 const Nav = () => {
   const [date, setDate] = useState([]);
@@ -31,10 +35,8 @@ const Nav = () => {
     <>
       <div className="nav-wrapper">
         <nav>
-          <div className="burger">
-            <span></span>
-            <span></span>
-            <span></span>
+          <div className="plus">
+            <FontAwesomeIcon icon="fa-solid fa-plus" />
           </div>
 
           <h1>Daily Planner</h1>
@@ -51,6 +53,12 @@ const Nav = () => {
             </div>
           </div>
         </nav>
+        <div className="display-grid">
+          <Priorities />
+          <Reminders />
+          <ToDo />
+          <Notes />
+        </div>
       </div>
     </>
   );
