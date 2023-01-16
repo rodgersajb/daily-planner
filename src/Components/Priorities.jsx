@@ -11,7 +11,7 @@ const Priorities = () => {
   console.log(currentUser, "PRIORITIES");
   // database reference
 
-  const priorityRef = ref(db, "users/" + user.id + "/priorities");
+  // const priorityRef = ref(db, "users/" + user.id + "/priorities");
   //update database
   // priorities, setPriorities in state
   // add new priority button
@@ -23,12 +23,11 @@ const Priorities = () => {
 
   const addPriority = (event) => {
     // create new instance of priorities
-    
 
-    update(priorityRef, {
-      // description: event.target.value,
-      updated: Date.now(),
-    });
+    // update(priorityRef, {
+    //   // description: event.target.value,
+    //   updated: Date.now(),
+    // });
     let data = [...priorities, []];
     setPriorities(data);
   };
