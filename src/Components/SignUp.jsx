@@ -42,7 +42,7 @@ const SignUp = () => {
   const handleOnSubmit = (event) => {
     event.preventDefault();
 
-      !validateEmail ? alert("Please enter a valid email") : true;
+    !validateEmail ? alert("Please enter a valid email") : true;
     // !validateEmail ? alert('enter a proper email!) or invoke code
     // if not validate, you're wrong!
     // if validate, you're validated!
@@ -55,7 +55,7 @@ const SignUp = () => {
           <h3>Daily Planner</h3>
         </div>
         <div className="form-container">
-          <div className="input">
+          {/* <div className="input">
             <FontAwesomeIcon icon="fa-solid fa-signature" />
             <input
               type={"text"}
@@ -63,7 +63,7 @@ const SignUp = () => {
               placeholder="name"
             />
             <span className="underline"></span>
-          </div>
+          </div> */}
           <div className="input">
             <FontAwesomeIcon icon="fa-solid fa-envelope" />
             <input
@@ -94,10 +94,10 @@ const SignUp = () => {
           <div className="button">
             <button onClick={handleSignUp}>Sign Up</button>
           </div>
+          <p>
+            Already have an account? <Link to="/">Sign In</Link>
+          </p>
         </div>
-        <p>
-          Already have an account? <Link to="/">Sign In</Link>
-        </p>
       </form>
     </div>
   );

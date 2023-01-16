@@ -14,14 +14,19 @@ import Notes from "./Notes";
 const Nav = () => {
   const [date, setDate] = useState([]);
   const { currentUser, setCurrentUser } = useContext(AuthContext);
-  const [priorities, setPriorities] = useState([]);
-  const [reminders, setReminders] = useState([]);
-  const [todo, setTodo] = useState([]);
-  const [notes, setNotes] = useState([]);
-  const [open, setOpen] = useState(false);
+  // const [priorities, setPriorities] = useState([]);
+  // const [reminders, setReminders] = useState([]);
+  // const [todo, setTodo] = useState([]);
+  // const [notes, setNotes] = useState([]);
+  // const [open, setOpen] = useState(false);
+  // const [post, setPost] = useState("");
 
   console.log(currentUser, "current user");
-
+  // console.log(priorities, "priorities");
+  // console.log(todo, "to do");
+  // console.log(reminders, "reminders");
+  // console.log(notes, "notes");
+  // console.log(post, "post");
   useEffect(() => {
     let theDate = new Date();
     setDate(theDate);
@@ -51,17 +56,29 @@ const Nav = () => {
                 <FontAwesomeIcon icon="fa-solid fa-plus" />
               </div>
             </div>
-            <div className={`plus-dropdown ${open ? "active" : "inactive"}`}>
+            {/* <div className={`plus-dropdown ${open ? "active" : "inactive"}`}>
               <label htmlFor=""></label>
-              <input type="text" />
+              <input
+                type="text"
+                value={post}
+                onChange={(e) => setPost(e.target.value)}
+              />
               <select name="" id="">
                 <option value="">Add to...</option>
-                <option value="priorities">Top Priorities{priorities}</option>
-                <option value="">To Do{todo}</option>
-                <option value="">Reminders{reminders}</option>
-                <option value="">Notes{notes}</option>
+                <option value="" onClick={() => setPriorities(post)}>
+                  Top Priorities{priorities}{" "}
+                </option>
+                <option value="" onChange={() => setTodo(post)}>
+                  To Do{todo}
+                </option>
+                <option value="" onChange={() => setReminders(post)}>
+                  Reminders{reminders}
+                </option>
+                <option value="" onChange={() => setNotes(post)}>
+                  Notes{notes}
+                </option>
               </select>
-            </div>
+            </div> */}
 
             <h1>Daily Planner</h1>
 
