@@ -12,7 +12,6 @@ const SignIn = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [userId, setUserId] = useState(null);
 
   const { currentUser, setCurrentUser } = useContext(AuthContext);
 
@@ -32,11 +31,9 @@ const SignIn = () => {
     const auth = getAuth(firebase);
     onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
-        console.log(currentUser, "THIS IS THE CURRENT USER");
         <Navigate to="/Home" />;
         setLoggedIn(true);
         const uid = currentUser.uid;
-        setUserId(uid);
       } else {
         setLoggedIn(false);
       }

@@ -38,9 +38,10 @@ const Reminders = () => {
       <div>
         {reminders.map((reminder, index) => {
           return (
-            <div>
+            <div key={index}>
               <input
                 type="text"
+                value={reminder}
                 onChange={(event) => handleChange(event, index)}
               />
               <button onClick={() => handleDelete(index)}>X</button>

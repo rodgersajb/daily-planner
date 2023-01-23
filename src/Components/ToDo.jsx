@@ -1,53 +1,23 @@
-import { useState } from "react";
-import { update, ref, remove } from "firebase/database";
-import "./ToDo.scss";
-import { firebase } from "./firebase";
+import { useState, useContext, useEffect } from "react";
+import { db } from "./firebase";
+import { ref, update, onValue, set } from "firebase/database";
+import { AuthContext } from "../Contexts/AuthContext";
+import { v4 as uuidv4 } from "uuid";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const ToDo = () => {
-  const [toDo, setToDo] = useState([]);
+const ToDo = (props) => {
+  const toDoRef = ref(db, `users/${currentUser.uid}/toDo/${props.id}`);
 
-  const addToDo = (event) => {
-    // create new instance of priorities
-
-    // update(priorityRef, {
-    //   // description: event.target.value,
-    //   updated: Date.now(),
-    // });
-    let data = [...toDo, []];
-    setToDo(data);
-  };
-
-  const handleChange = (event, index) => {
-    let inputData = [...toDo];
-    inputData[index] = event.target.value;
-  };
-
-  const handleDelete = (index) => {
-    remove(priorityRef(index));
-    let deleteData = [...toDo];
-    deleteData.splice(index, 1);
-    setPriorities(deleteData);
+  const handleDelete = () => {
+    if (confirm("Are you sure you want to delete?")) {
+      remove(toDoRef);
+    }
   };
 
   return (
-    <div className="to-do span-2-row">
-      <h2>
-        To Do
-        <button onClick={addToDo}></button>
-      </h2>
-      <div className="to-do-background">
-        {toDo.map((data, index) => {
-          return (
-            <div>
-              <input
-                type="text"
-                onChange={(event) => handleChange(event, index)}
-              />
-              <button onClick={() => handleDelete(index)}>X</button>
-            </div>
-          );
-        })}
-      </div>
+    <div>
+      {props.description}
+      <button onClick={handleDelete}>Remove ToDo</button>
     </div>
   );
 };

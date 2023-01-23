@@ -1,6 +1,6 @@
 import "./Priorities.scss";
-import { useState, useContext } from "react";
-import { update, remove, ref } from "firebase/database";
+import { useState, useContext, useEffect } from "react";
+import { update, remove, ref, onValue } from "firebase/database";
 import { firebase, db } from "./firebase";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AuthContext } from "../Contexts/AuthContext";
@@ -8,10 +8,9 @@ import { AuthContext } from "../Contexts/AuthContext";
 const Priorities = () => {
   const { currentUser, setCurrentUser } = useContext(AuthContext);
 
-  console.log(currentUser, "PRIORITIES");
   // database reference
 
-  // const priorityRef = ref(db, "users/" + user.id + "/priorities");
+  const priorityRef = ref(db, "users/" + currentUser.uid + "/priorities");
   //update database
   // priorities, setPriorities in state
   // add new priority button
@@ -19,17 +18,24 @@ const Priorities = () => {
 
   // button on click will create a priority with radio button
   // if radio button checked then priority task is removed
+
+  useEffect(() => {
+    onValue(priorityRef, (snapshot) => {
+      const data = snapshot.val();
+    });
+  }, []);
+
   const [priorities, setPriorities] = useState([]);
 
   const addPriority = (event) => {
     // create new instance of priorities
 
-    // update(priorityRef, {
-    //   // description: event.target.value,
-    //   updated: Date.now(),
-    // });
-    let data = [...priorities, []];
-    setPriorities(data);
+    update(priorityRef, {
+      updated: Date.now(),
+    });
+
+    let priority = [...priorities];
+    setPriorities(priority);
   };
 
   const handleChange = (event, index) => {
@@ -38,13 +44,11 @@ const Priorities = () => {
   };
 
   const handleDelete = (index) => {
-    remove(priorityRef(index));
+    // remove(priorityRef(index));
     let deleteData = [...priorities];
     deleteData.splice(index, 1);
     setPriorities(deleteData);
   };
-
-  console.log(priorities, "PRIORITIES");
 
   return (
     <div className="container">
@@ -57,9 +61,10 @@ const Priorities = () => {
       <div>
         {priorities.map((priority, index) => {
           return (
-            <div>
+            <div key={index}>
               <input
                 type="text"
+                // value={priority}
                 onChange={(event) => handleChange(event, index)}
               />
               <button onClick={() => handleDelete(index)}>X</button>
@@ -72,3 +77,14 @@ const Priorities = () => {
 };
 
 export default Priorities;
+
+// {
+//   "rules": {
+//     "users": {
+//       "$uid": {
+//         ".read": "$uid === auth.uid",
+//         ".write": "$uid === auth.uid"
+//       }
+//     }
+//   }
+// }

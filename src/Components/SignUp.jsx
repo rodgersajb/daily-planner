@@ -21,11 +21,11 @@ const SignUp = () => {
 
         // Signed in
 
-        console.log(user);
+        console.log(user, "USERRRR");
         alert("Successfully signed up!");
         set(ref(db, "users/" + user.uid), {
           email: email,
-          name: user.displayName,
+          displayName: name,
         });
 
         // ...
@@ -55,7 +55,7 @@ const SignUp = () => {
           <h3>Daily Planner</h3>
         </div>
         <div className="form-container">
-          {/* <div className="input">
+          <div className="input">
             <FontAwesomeIcon icon="fa-solid fa-signature" />
             <input
               type={"text"}
@@ -63,7 +63,7 @@ const SignUp = () => {
               placeholder="name"
             />
             <span className="underline"></span>
-          </div> */}
+          </div>
           <div className="input">
             <FontAwesomeIcon icon="fa-solid fa-envelope" />
             <input

@@ -8,7 +8,7 @@ import { firebase } from "./firebase";
 import SignIn from "./SignIn";
 import Priorities from "./Priorities";
 import Reminders from "./Reminders";
-import ToDo from "./ToDo";
+import ToDoList from "./ToDoList";
 import Notes from "./Notes";
 
 const Nav = () => {
@@ -21,7 +21,6 @@ const Nav = () => {
   // const [open, setOpen] = useState(false);
   // const [post, setPost] = useState("");
 
-  console.log(currentUser, "current user");
   // console.log(priorities, "priorities");
   // console.log(todo, "to do");
   // console.log(reminders, "reminders");
@@ -97,7 +96,7 @@ const Nav = () => {
           <div className="display-grid">
             <Priorities />
             <Reminders />
-            <ToDo />
+            <ToDoList />
             <Notes />
           </div>
         </div>
