@@ -1,78 +1,79 @@
 import "./Priorities.scss";
 import { useState, useContext, useEffect } from "react";
-import { update, remove, ref, onValue } from "firebase/database";
+import { update, remove, ref, onValue, push } from "firebase/database";
 import { firebase, db } from "./firebase";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AuthContext } from "../Contexts/AuthContext";
+import Priority from "./Priority";
 
 const Priorities = () => {
-  const { currentUser, setCurrentUser } = useContext(AuthContext);
-
-  // database reference
-
-  const priorityRef = ref(db, "users/" + currentUser.uid + "/priorities");
-  //update database
-  // priorities, setPriorities in state
-  // add new priority button
-  // map through priorities in return
-
-  // button on click will create a priority with radio button
-  // if radio button checked then priority task is removed
+  const { currentUser } = useContext(AuthContext);
+  const [priorities, setPriorities] = useState([]);
+  const [userInput, setUserInput] = useState("");
 
   useEffect(() => {
-    onValue(priorityRef, (snapshot) => {
+    const prioritiesRef = ref(db, `users/${currentUser.uid}/priorities`);
+    onValue(prioritiesRef, (snapshot) => {
       const data = snapshot.val();
+      const priority = data
+        ? Object.keys(data).map((key) => {
+            return { id: key, ...data[key] };
+          })
+        : [];
+      setPriorities(priority);
     });
   }, []);
 
-  const [priorities, setPriorities] = useState([]);
+  const handleInputChange = (event) => {
+    setUserInput(event.target.value);
+  };
 
-  const addPriority = (event) => {
-    // create new instance of priorities
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+  };
 
-    update(priorityRef, {
-      updated: Date.now(),
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const prioritiesRef = ref(db, `users/${currentUser.uid}/priorities`);
+    push(prioritiesRef, {
+      description: userInput,
     });
-
-    let priority = [...priorities];
-    setPriorities(priority);
-  };
-
-  const handleChange = (event, index) => {
-    let inputData = [...priorities];
-    inputData[index] = event.target.value;
-  };
-
-  const handleDelete = (index) => {
-    // remove(priorityRef(index));
-    let deleteData = [...priorities];
-    deleteData.splice(index, 1);
-    setPriorities(deleteData);
+    setUserInput("");
   };
 
   return (
-    <div className="container">
-      <h2>
-        Top Priorities
-        <button onClick={addPriority}>
-          <FontAwesomeIcon icon="fa-solid fa-plus" />
-        </button>
-      </h2>
-      <div>
-        {priorities.map((priority, index) => {
-          return (
-            <div key={index}>
+    <>
+      <div className="priorities">
+        <h2>
+          Priorities
+          <form action="submit" onSubmit={handleFormSubmit}>
+            <label htmlFor="newToDo">
               <input
                 type="text"
-                // value={priority}
-                onChange={(event) => handleChange(event, index)}
+                id="newToDo"
+                onChange={handleInputChange}
+                value={userInput}
               />
-              <button onClick={() => handleDelete(index)}>X</button>
-            </div>
-          );
-        })}
+            </label>
+
+            <button onClick={handleSubmit}>
+              <FontAwesomeIcon icon="fa-solid fa-plus" />
+            </button>
+          </form>
+        </h2>
+        <div className="priorities-background">
+          <ul>
+            {priorities.map((priority) => {
+              return (
+                <li key={priority.id}>
+                  <Priority {...priority} />
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

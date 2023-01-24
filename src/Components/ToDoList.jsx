@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { update, ref, remove, onValue, set, push } from "firebase/database";
 import "./ToDoList.scss";
-import { firebase } from "./firebase";
 import { db } from "./firebase";
 import { AuthContext } from "../Contexts/AuthContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,7 +8,7 @@ import ToDo from "./ToDo";
 import { v4 as uuid } from "uuid";
 
 const ToDoList = () => {
-  const { currentUser, setCurrentUser } = useContext(AuthContext);
+  const { currentUser } = useContext(AuthContext);
   const [toDos, setToDos] = useState([]);
   const [userInput, setUserInput] = useState("");
 
@@ -46,7 +45,7 @@ const ToDoList = () => {
 
   return (
     <>
-      <div className="to-do">
+      <div className="to-do span-2-row">
         <h2>
           To Do
           <form action="submit" onSubmit={handleFormSubmit}>
@@ -65,8 +64,6 @@ const ToDoList = () => {
           </form>
         </h2>
         <div className="to-do-background">
-          
-
           <ul>
             {toDos.map((toDo) => {
               return (

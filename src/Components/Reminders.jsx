@@ -1,55 +1,80 @@
 import "./Reminders.scss";
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
+import { update, remove, ref, onValue, push } from "firebase/database";
+import { firebase, db } from "./firebase";
+import Reminder from "./Reminder";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { AuthContext } from "../Contexts/AuthContext";
 
 const Reminders = () => {
+  const { currentUser } = useContext(AuthContext);
   const [reminders, setReminders] = useState([]);
+  const [userInput, setUserInput] = useState("");
 
-  const addReminder = (event) => {
-    // create new instance of priorities
+  useEffect(() => {
+    const reminderRef = ref(db, `users/${currentUser.uid}/reminders`);
+    onValue(reminderRef, (snapshot) => {
+      const data = snapshot.val();
+      const reminder = data
+        ? Object.keys(data).map((key) => {
+            return { id: key, ...data[key] };
+          })
+        : [];
+      setReminders(reminder);
+    });
+  }, []);
 
-    // update(priorityRef, {
-    //   // description: event.target.value,
-    //   updated: Date.now(),
-    // });
-    let data = [...reminders, []];
-    setReminders(data);
+  const handleInputChange = (event) => {
+    setUserInput(event.target.value);
   };
 
-  const handleChange = (event, index) => {
-    let inputData = [...reminders];
-    inputData[index] = event.target.value;
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
   };
 
-  const handleDelete = (index) => {
-    remove(priorityRef(index));
-    let deleteData = [...reminders];
-    deleteData.splice(index, 1);
-    setReminders(deleteData);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const reminderRef = ref(db, `users/${currentUser.uid}/reminders`);
+    push(reminderRef, {
+      description: userInput,
+    });
+    setUserInput("");
   };
+
   return (
-    <div className="container">
-      <h2>
-        Reminders
-        <button onClick={addReminder}>
-          <FontAwesomeIcon icon="fa-solid fa-plus" />
-        </button>
-      </h2>
-      <div>
-        {reminders.map((reminder, index) => {
-          return (
-            <div key={index}>
+    <>
+      <div className="reminders">
+        <h2>
+          Reminders
+          <form action="submit" onSubmit={handleFormSubmit}>
+            <label htmlFor="newToDo">
               <input
                 type="text"
-                value={reminder}
-                onChange={(event) => handleChange(event, index)}
+                id="newToDo"
+                onChange={handleInputChange}
+                value={userInput}
               />
-              <button onClick={() => handleDelete(index)}>X</button>
-            </div>
-          );
-        })}
+            </label>
+
+            <button onClick={handleSubmit}>
+              <FontAwesomeIcon icon="fa-solid fa-plus" />
+            </button>
+          </form>
+        </h2>
+        <div className="reminders-background">
+          <ul>
+            {reminders.map((reminder) => {
+              return (
+                <li key={reminder.id}>
+                  <Reminder {...reminder} />
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

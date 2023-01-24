@@ -1,53 +1,77 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { update, ref, remove, onValue, set, push } from "firebase/database";
+import "./ToDoList.scss";
+import { db } from "./firebase";
+import { AuthContext } from "../Contexts/AuthContext";
 import "./Notes.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Note from "./Note";
 
 const Notes = () => {
+  const { currentUser } = useContext(AuthContext);
   const [notes, setNotes] = useState([]);
+  const [userInput, setUserInput] = useState("");
 
-  const addNote = (event) => {
-    // create new instance of priorities
+  useEffect(() => {
+    const notesRef = ref(db, `users/${currentUser.uid}/notes`);
+    onValue(notesRef, (snapshot) => {
+      const data = snapshot.val();
+      console.log(data, "DATA");
+      const notes = data
+        ? Object.keys(data).map((key) => {
+            return { id: key, ...data[key] };
+          })
+        : [];
+      setNotes(notes);
+    });
+  }, []);
 
-    // update(priorityRef, {
-    //   // description: event.target.value,
-    //   updated: Date.now(),
-    // });
-    let data = [...notes, []];
-    setNotes(data);
+  const handleInputChange = (event) => {
+    setUserInput(event.target.value);
   };
 
-  const handleChange = (event, index) => {
-    let inputData = [...notes];
-    inputData[index] = event.target.value;
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
   };
 
-  const handleDelete = (index) => {
-    remove(priorityRef(index));
-    let deleteData = [...notes];
-    deleteData.splice(index, 1);
-    setNotes(deleteData);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const notesRef = ref(db, `users/${currentUser.uid}/notes`);
+    push(notesRef, {
+      description: userInput,
+    });
+    setUserInput("");
   };
+
   return (
     <div className="notes span-2-col">
       <h2>
         Notes
-        <button onClick={addNote}>
-          <FontAwesomeIcon icon="fa-solid fa-plus" />
-        </button>
+        <form action="submit" onSubmit={handleFormSubmit}>
+          <label htmlFor="newToDo">
+            <input
+              type="text"
+              id="newToDo"
+              onChange={handleInputChange}
+              value={userInput}
+            />
+          </label>
+
+          <button onClick={handleSubmit}>
+            <FontAwesomeIcon icon="fa-solid fa-plus" />
+          </button>
+        </form>
       </h2>
       <div className="notes-background">
-        {notes.map((note, index) => {
-          return (
-            <div key={index}>
-              <input
-                type="text"
-                value={note}
-                onChange={(event) => handleChange(event, index)}
-              />
-              <button onClick={() => handleDelete(index)}>X</button>
-            </div>
-          );
-        })}
+        <ul>
+          {notes.map((note) => {
+            return (
+              <li key={note.id}>
+                <Note {...note} />
+              </li>
+            );
+          })}
+        </ul>
       </div>
     </div>
   );
