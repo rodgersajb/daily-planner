@@ -11,62 +11,75 @@ import { v4 as uuid } from "uuid";
 const ToDoList = () => {
   const { currentUser, setCurrentUser } = useContext(AuthContext);
   const [toDos, setToDos] = useState([]);
-  const [userInput, setUserInput] = useState('')
+  const [userInput, setUserInput] = useState("");
 
   useEffect(() => {
     const toDoListsRef = ref(db, `users/${currentUser.uid}/toDo`);
     onValue(toDoListsRef, (snapshot) => {
       const data = snapshot.val();
-      const toDos = data ? Object.keys(data).map((key) => {
-        return { id: key, ...data[key]};
-      })
-      : []
-      setToDos(toDos)
-    })
-  }, [])
+      console.log(data, "DATA");
+      const toDos = data
+        ? Object.keys(data).map((key) => {
+            return { id: key, ...data[key] };
+          })
+        : [];
+      setToDos(toDos);
+    });
+  }, []);
 
   const handleInputChange = (event) => {
-    setUserInput(event.target.value)
-  }
-  
+    setUserInput(event.target.value);
+  };
+
   const handleFormSubmit = (event) => {
     event.preventDefault();
-  }
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const toDoListsRef = ref(db, `users/${currentUser.uid}/toDo${uuid()}`);
-    set(toDoListsRef, {
+    const toDoListsRef = ref(db, `users/${currentUser.uid}/toDo`);
+    push(toDoListsRef, {
       description: userInput,
-    })
-    setUserInput('')
-  }
-
-
-
-
+    });
+    setUserInput("");
+  };
 
   return (
     <>
-    <div className="to-do">
-      <ul>
-        {toDos.map((toDo) => {
-          return (
-            <li key={toDo.id}>
-              <ToDo {...toDo} />
-            </li>
-          )
-        })}
-      </ul>
-      <form action="submit" onSubmit={handleFormSubmit}>
-        <label htmlFor="newToDo">
-          <input type="text" id="newToDo" onChange={handleInputChange} value={userInput} />
-          <button onClick={handleSubmit}>Add ToDo</button>
-        </label>
-      </form>
-    </div>
+      <div className="to-do">
+        <h2>
+          To Do
+          <form action="submit" onSubmit={handleFormSubmit}>
+            <label htmlFor="newToDo">
+              <input
+                type="text"
+                id="newToDo"
+                onChange={handleInputChange}
+                value={userInput}
+              />
+            </label>
+
+            <button onClick={handleSubmit}>
+              <FontAwesomeIcon icon="fa-solid fa-plus" />
+            </button>
+          </form>
+        </h2>
+        <div className="to-do-background">
+          
+
+          <ul>
+            {toDos.map((toDo) => {
+              return (
+                <li key={toDo.id}>
+                  <ToDo {...toDo} />
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      </div>
     </>
-  )
+  );
 };
 
 export default ToDoList;
