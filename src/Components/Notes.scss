@@ -53,11 +53,34 @@
           width: 100%;
           display: flex;
           justify-content: space-between;
-          button {
-            font-size: 1rem;
+          align-items: center;
+          .garbage {
+            font-size: 1.6rem;
+            &:hover {
+              cursor: pointer;
+              animation: shake 0.4s;
+            }
           }
         }
       }
     }
+  }
+}
+
+@keyframes shake {
+  0% {
+    transform: rotate(0deg) translateX(0px);
+  }
+  25% {
+    transform: rotate(10deg) translateX(-4px);
+  }
+  50% {
+    transform: rotate(0deg) translateX(0px);
+  }
+  75% {
+    transform: rotate(5deg) translateX(-4px);
+  }
+  100% {
+    transform: rotate(0deg) translateX(0px);
   }
 }

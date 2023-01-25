@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { db } from "./firebase";
 import { remove, ref } from "firebase/database";
 import { AuthContext } from "../Contexts/AuthContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Reminder = (props) => {
   const { currentUser } = useContext(AuthContext);
@@ -17,7 +18,9 @@ const Reminder = (props) => {
     <>
       <div className="reminder-entry">
         <p>{props.description}</p>
-        <button onClick={handleDelete}>Remove</button>
+        <div className="garbage">
+          <FontAwesomeIcon onClick={handleDelete} icon="fa-solid fa-trash" />
+        </div>
       </div>
     </>
   );

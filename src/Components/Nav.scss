@@ -13,30 +13,6 @@
 
       width: 100%;
 
-      .plus-container {
-        .plus-trigger {
-          .fa-plus {
-            font-size: 2rem;
-            color: #6f204d;
-
-            margin: 6px 0;
-          }
-        }
-      }
-      .plus-dropdown.active {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(50px);
-        transition: ease-in 0.2s;
-      }
-
-      .plus-dropdown.inactive {
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(-20px);
-        transition: ease 0.2s;
-      }
-
       h1 {
         color: #6f204d;
         text-transform: uppercase;

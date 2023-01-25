@@ -1,7 +1,8 @@
-import {  useContext } from "react";
+import { useContext } from "react";
 import { db } from "./firebase";
 import { ref, remove } from "firebase/database";
 import { AuthContext } from "../Contexts/AuthContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Priority = (props) => {
   const { currentUser } = useContext(AuthContext);
@@ -20,7 +21,9 @@ const Priority = (props) => {
     <>
       <div className="priority-entry">
         <p>{props.description}</p>
-        <button onClick={handleDelete}>Remove</button>
+        <div className="garbage">
+          <FontAwesomeIcon onClick={handleDelete} icon="fa-solid fa-trash" />
+        </div>
       </div>
     </>
   );

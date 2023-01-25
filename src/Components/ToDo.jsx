@@ -20,7 +20,9 @@ const ToDo = (props) => {
   return (
     <div className="to-do-entry">
       <p>{props.description}</p>
-      <button onClick={handleDelete}>Remove ToDo</button>
+      <div className="garbage">
+        <FontAwesomeIcon onClick={handleDelete} icon="fa-solid fa-trash" />
+      </div>
     </div>
   );
 };
