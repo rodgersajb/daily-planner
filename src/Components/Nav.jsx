@@ -14,7 +14,7 @@ import Notes from "./Notes";
 const Nav = () => {
   const [date, setDate] = useState([]);
   const { currentUser, setCurrentUser } = useContext(AuthContext);
- 
+
   useEffect(() => {
     let theDate = new Date();
     setDate(theDate);
@@ -34,17 +34,13 @@ const Nav = () => {
       <section className="nav">
         <div className="nav-wrapper">
           <nav>
-            <div className="dropdown-menu">
+            {/* <div className="dropdown-menu"> */}
+            <div className="dropdown-content">
               <FontAwesomeIcon icon="fa-solid fa-user" />
-              <div className="dropdown-content">
-                <p>Logged in as {currentUser.email}</p>
-                <button onClick={handleSignOut}>
-                  <FontAwesomeIcon icon="fa-solid fa-right-from-bracket" />
-                  <p>Sign Out</p>
-                </button>
-              </div>
+              <p>{currentUser.email}</p>
+              <button onClick={handleSignOut}>Sign Out</button>
             </div>
-  
+            {/* </div> */}
 
             <h1>Daily Planner</h1>
 

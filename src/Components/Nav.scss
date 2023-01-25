@@ -32,19 +32,40 @@
         text-align: center;
         font-weight: bold;
       }
-      .dropdown-menu {
-        position: relative;
-        &:hover .dropdown-content {
-          display: block;
-        }
+      // .dropdown-menu {
+      //   position: relative;
+
+      //   &:hover .dropdown-content {
+      //     display: block;
+      //   }
+
+      .dropdown-content {
+        display: flex;
+        align-items: center;
+        border-radius: 5px;
+
+        flex-direction: column;
         .fa-user {
           font-size: 1.4rem;
           color: #6f204d;
         }
-        .dropdown-content {
-          position: absolute;
-          display: none;
+
+        p {
+          font-size: 1.4rem;
+          color: #6f204d;
+          font-weight: bold;
         }
+
+        button {
+          font-size: 1.2rem;
+          color: #6f204d;
+          font-weight: bold;
+          background-color: beige;
+          border-radius: 4px;
+
+          border: 2px solid #6f204d;
+        }
+        // }
       }
     }
     .display-grid {
