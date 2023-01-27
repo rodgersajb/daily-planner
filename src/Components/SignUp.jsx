@@ -60,7 +60,7 @@ const SignUp = () => {
             <input
               type={"text"}
               onChange={(event) => setName(event.target.value)}
-              placeholder="name"
+              placeholder="Name"
             />
             <span className="underline"></span>
           </div>
@@ -91,9 +91,9 @@ const SignUp = () => {
             />
             <span className="underline"></span>
           </div>
-          <div className="button">
-            <button onClick={handleSignUp}>Sign Up</button>
-          </div>
+
+          <button onClick={handleSignUp}>Sign Up</button>
+
           <p>
             Already have an account? <Link to="/">Sign In</Link>
           </p>

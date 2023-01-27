@@ -68,21 +68,22 @@ body {
           color: $bodyColor;
         }
         .fa-envelope,
-        .fa-lock {
+        .fa-lock,
+        .fa-signature {
           color: $bodyColor;
           padding-right: 10px;
           font-size: 1.4rem;
         }
       }
-      .button {
-        button {
-          background-color: $bodyColor;
-          color: #fff;
-          width: 7rem;
-          padding: 5px;
-          border-radius: 5rem;
-          font-size: 1.2rem;
-        }
+
+      button {
+        background-color: $bodyColor;
+        color: #fff;
+        width: 7rem;
+        padding: 5px;
+        border-radius: 5rem;
+        font-size: 1.2rem;
+        width: 33%;
       }
     }
     p {

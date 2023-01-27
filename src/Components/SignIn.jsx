@@ -1,6 +1,7 @@
 import { AuthContext } from "../Contexts/AuthContext";
 import { useEffect, useState, useContext } from "react";
 import { Navigate, Link } from "react-router-dom";
+import "./SignIn.scss";
 import {
   getAuth,
   signInWithEmailAndPassword,
@@ -59,29 +60,38 @@ const SignIn = () => {
   }
 
   return (
-    <div className="form">
-      <h3>Daily Planner</h3>
+    <div className="wrapper">
       <form action="" onSubmit={handleClick}>
-        <FontAwesomeIcon icon="fa-solid fa-envelope" />
-        <input
-          type={"email"}
-          onChange={(event) => setEmail(event.target.value)}
-          placeholder="Email"
-        />
-        <span className="underline"></span>
-        <FontAwesomeIcon icon="fa-solid fa-lock" />
-        <input
-          type="password"
-          onChange={(event) => setPassword(event.target.value)}
-          placeholder="Password"
-        />
-        <span className="underline"></span>
+        <div className="planner-container">
+          <h3>Daily Planner</h3>
+        </div>
+        <div className="form-container">
+          <div className="input">
+            <FontAwesomeIcon icon="fa-solid fa-envelope" />
+            <input
+              type={"email"}
+              onChange={(event) => setEmail(event.target.value)}
+              placeholder="Email"
+            />
+            <span className="underline"></span>
+          </div>
+          <div className="input">
+            <FontAwesomeIcon icon="fa-solid fa-lock" />
+            <input
+              type="password"
+              onChange={(event) => setPassword(event.target.value)}
+              placeholder="Password"
+            />
+            <span className="underline"></span>
+          </div>
 
-        <button onClick={handleSignIn}>Sign In</button>
+          <button onClick={handleSignIn}>Sign In</button>
+        </div>
+
+        <p>
+          Don't have an account? <Link to="/Signup">Sign Up</Link>
+        </p>
       </form>
-      <p>
-        Don't have an account? <Link to="/Signup">Sign Up</Link>
-      </p>
     </div>
   );
 };
