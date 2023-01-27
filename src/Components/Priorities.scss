@@ -9,6 +9,7 @@
     background-color: rgb(255, 184, 76);
     color: #6f204d;
     text-align: center;
+    font-size: 2rem;
     // background-size: contain;
     text-transform: uppercase;
     padding: 20px 0;
@@ -17,11 +18,39 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    input {
-      background: transparent;
-      outline: none;
-      border-style: none;
-      border-bottom: 2px solid #6f204d;
+
+    form {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 40px 0 40px;
+
+      input {
+        background: transparent;
+        outline: none;
+        border-style: none;
+        border-bottom: 2px solid #6f204d;
+        font-size: 1.46rem;
+        color: #6f204d;
+      }
+      button {
+        background-color: transparent;
+        border: 3px solid #6f204d;
+        border-radius: 50%;
+        cursor: pointer;
+
+        &:hover,
+        &:focus {
+          background-color: #6f204d;
+        }
+        .fa-plus {
+          color: #6f204d;
+          &:hover,
+          &:focus {
+            color: rgb(255, 184, 76);
+          }
+        }
+      }
     }
   }
 
@@ -80,6 +109,7 @@
     transform: rotate(0deg) translateX(0px);
   }
 }
-.span-2-row {
+
+an-2-row {
   grid-row: span 2;
 }
