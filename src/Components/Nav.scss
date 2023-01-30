@@ -59,11 +59,10 @@
 
           &:hover,
           &:focus {
-            font-size: 1.4rem;
-            transition: ease-in-out 0.2s;
+            background-color: #6f204d;
+            color: beige;
           }
         }
-        // }
       }
     }
     .display-grid {
@@ -102,7 +101,61 @@
 }
 
 @media (max-width: 650px) {
-   .nav .nav-wrapper nav h1 {
+  .nav .nav-wrapper nav h1 {
     font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 590px) {
+  .nav {
+    .nav-wrapper {
+      nav {
+        .dropdown-content {
+          .fa-user {
+            margin: 10px 0 0 0;
+            font-size: 1rem;
+          }
+          p {
+            font-size: 1.2rem;
+          }
+          button {
+            font-size: 1rem;
+            margin: 0 0 10px 0;
+          }
+        }
+        h1 {
+          font-size: 2.2rem;
+          text-align: center;
+        }
+        .date {
+          font-size: 1.2rem;
+          padding: 5px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .nav {
+    .nav-wrapper {
+      nav {
+        .dropdown-content {
+          .fa-user {
+            font-size: 1rem;
+          }
+          p {
+            font-size: 1rem;
+          }
+        }
+        h1 {
+          font-size: 1.6rem;
+        }
+        .date {
+          font-size: 1rem;
+          padding: 10px;
+        }
+      }
+    }
   }
 }
