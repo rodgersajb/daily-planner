@@ -61,7 +61,7 @@ const SignIn = () => {
 
   return (
     <div className="wrapper">
-      <form action="" onSubmit={handleClick}>
+      <form className="form-sign-in" action="" onSubmit={handleClick}>
         <div className="planner-container">
           <h3>Daily Planner</h3>
         </div>

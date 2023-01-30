@@ -1,4 +1,7 @@
-.form-container {
-  display: flex;
-  flex-direction: column;
+body {
+  .wrapper {
+    .form-sign-in {
+      height: 70%;
+    }
+  }
 }

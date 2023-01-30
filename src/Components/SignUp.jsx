@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Fontawesome";
 import { firebase, db } from "./firebase";
@@ -7,6 +7,7 @@ import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./SignUp.scss";
 import { validateEmail } from "./ValidateEmail";
+
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -19,16 +20,11 @@ const SignUp = () => {
       .then((response) => {
         const user = response.user;
 
-        // Signed in
-
-        console.log(user, "USERRRR");
         alert("Successfully signed up!");
         set(ref(db, "users/" + user.uid), {
           email: email,
           displayName: name,
         });
-
-        // ...
       })
 
       .catch((error) => {
@@ -43,13 +39,10 @@ const SignUp = () => {
     event.preventDefault();
 
     !validateEmail ? alert("Please enter a valid email") : true;
-    // !validateEmail ? alert('enter a proper email!) or invoke code
-    // if not validate, you're wrong!
-    // if validate, you're validated!
   };
 
   return (
-    <div className="wrapper">
+    <div className="wrapper sign-in">
       <form action="" onSubmit={handleOnSubmit}>
         <div className="planner-container">
           <h3>Daily Planner</h3>
