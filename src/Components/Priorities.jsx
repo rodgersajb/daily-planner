@@ -1,10 +1,13 @@
 import "./Priorities.scss";
 import { useState, useContext, useEffect } from "react";
-import { update, remove, ref, onValue, push } from "firebase/database";
-import { firebase, db } from "./firebase";
+import { ref, onValue, push } from "firebase/database";
+import { db } from "./firebase";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AuthContext } from "../Contexts/AuthContext";
 import Priority from "./Priority";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import { useCallback } from "react";
 
 const Priorities = () => {
   const { currentUser } = useContext(AuthContext);
@@ -43,36 +46,38 @@ const Priorities = () => {
 
   return (
     <>
-      <div className="priorities">
-        <h2>
-          Priorities
-          <form action="submit" onSubmit={handleFormSubmit}>
-            <label htmlFor="newToDo">
-              <input
-                type="text"
-                id="newToDo"
-                onChange={handleInputChange}
-                value={userInput}
-              />
-            </label>
+      <DndProvider backend={HTML5Backend}>
+        <div className="priorities">
+          <h2>
+            Priorities
+            <form action="submit" onSubmit={handleFormSubmit}>
+              <label htmlFor="newToDo">
+                <input
+                  type="text"
+                  id="newToDo"
+                  onChange={handleInputChange}
+                  value={userInput}
+                />
+              </label>
 
-            <button onClick={handleSubmit}>
-              <FontAwesomeIcon icon="fa-solid fa-plus" />
-            </button>
-          </form>
-        </h2>
-        <div className="priorities-background">
-          <ul>
-            {priorities.map((priority) => {
-              return (
-                <li key={priority.id}>
-                  <Priority {...priority} />
-                </li>
-              );
-            })}
-          </ul>
+              <button onClick={handleSubmit}>
+                <FontAwesomeIcon icon="fa-solid fa-plus" />
+              </button>
+            </form>
+          </h2>
+          <div className="priorities-background">
+            <ul>
+              {priorities.map((priority) => {
+                return (
+                  <li key={priority.id}>
+                    <Priority {...priority} />
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
         </div>
-      </div>
+      </DndProvider>
     </>
   );
 };

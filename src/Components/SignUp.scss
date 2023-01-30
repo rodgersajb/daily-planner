@@ -37,6 +37,41 @@ body {
         margin: 50px 0 50px 0;
 
         width: 100%;
+        .input {
+          display: flex;
+          align-items: center;
+          margin: 20px 0 20px 0;
+          width: 50%;
+          input {
+            border: none;
+            border-bottom: 2px solid $bodyColor;
+            width: 12rem;
+            outline: none;
+            font-size: 1.4rem;
+            color: $bodyColor;
+            width: 95%;
+          }
+          .fa-envelope,
+          .fa-lock,
+          .fa-signature {
+            color: $bodyColor;
+            padding-right: 10px;
+            font-size: 1.4rem;
+          }
+        }
+
+        button {
+          background-color: $bodyColor;
+          color: #fff;
+          width: 7rem;
+          padding: 5px;
+          border-radius: 5rem;
+          font-size: 1.2rem;
+          width: calc(50% + 10px);
+        }
+        p {
+          font-size: 1.6rem;
+        }
       }
       .planner-container {
         background: linear-gradient(
@@ -57,37 +92,55 @@ body {
           font-weight: bold;
         }
       }
-      .input {
-        margin: 20px;
-        input {
-          border: none;
-          border-bottom: 2px solid $bodyColor;
-          width: 12rem;
-          outline: none;
-          font-size: 1.4rem;
-          color: $bodyColor;
-        }
-        .fa-envelope,
-        .fa-lock,
-        .fa-signature {
-          color: $bodyColor;
-          padding-right: 10px;
-          font-size: 1.4rem;
-        }
-      }
+    }
+  }
+}
 
-      button {
-        background-color: $bodyColor;
-        color: #fff;
-        width: 7rem;
-        padding: 5px;
-        border-radius: 5rem;
-        font-size: 1.2rem;
-        width: 33%;
+@media (max-width: 830px) {
+  body {
+    .wrapper {
+      form {
+        width: 90%;
+        .form-container {
+          .input {
+            width: 65%;
+          }
+          button {
+            width: calc(65% + 10px);
+          }
+          p {
+            text-align: center;
+            width: 85%;
+          }
+        }
       }
     }
-    p {
-      font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 500px) {
+  body {
+    .wrapper {
+      form {
+        width: 90%;
+        .planner-container {
+          h3 {
+            font-size: 2.2rem;
+          }
+        }
+        .form-container {
+          .input {
+            width: 85%;
+          }
+          button {
+            width: calc(85% + 10px);
+          }
+          p {
+            text-align: center;
+            width: 75%;
+          }
+        }
+      }
     }
   }
 }

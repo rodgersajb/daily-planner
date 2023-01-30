@@ -86,11 +86,11 @@ const SignIn = () => {
           </div>
 
           <button onClick={handleSignIn}>Sign In</button>
-        </div>
 
-        <p>
-          Don't have an account? <Link to="/Signup">Sign Up</Link>
-        </p>
+          <p>
+            Don't have an account? <Link to="/Signup">Sign Up</Link>
+          </p>
+        </div>
       </form>
     </div>
   );
