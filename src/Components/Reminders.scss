@@ -24,15 +24,20 @@
       justify-content: space-between;
       align-items: center;
       padding: 0 40px 0 40px;
+      label {
+        width: 100%;
 
-      input {
-        background: transparent;
-        outline: none;
-        border-style: none;
-        border-bottom: 2px solid #6f204d;
-        font-size: 1.46rem;
-        color: #6f204d;
+        input {
+          background: transparent;
+          outline: none;
+          border-style: none;
+          border-bottom: 2px solid #6f204d;
+          font-size: 1.46rem;
+          color: #6f204d;
+          width: 95%;
+        }
       }
+
       button {
         background-color: transparent;
         border: 3px solid #6f204d;

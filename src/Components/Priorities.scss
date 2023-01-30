@@ -24,14 +24,17 @@
       justify-content: space-between;
       align-items: center;
       padding: 0 40px 0 40px;
-
-      input {
-        background: transparent;
-        outline: none;
-        border-style: none;
-        border-bottom: 2px solid #6f204d;
-        font-size: 1.46rem;
-        color: #6f204d;
+      label {
+        width: 100%;
+        input {
+          background: transparent;
+          outline: none;
+          border-style: none;
+          border-bottom: 2px solid #6f204d;
+          font-size: 1.46rem;
+          color: #6f204d;
+          width: 95%;
+        }
       }
       button {
         background-color: transparent;
@@ -110,6 +113,6 @@
   }
 }
 
-an-2-row {
+.span-2-row {
   grid-row: span 2;
 }

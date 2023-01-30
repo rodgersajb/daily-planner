@@ -75,3 +75,34 @@
     }
   }
 }
+
+@media (max-width: 1150px) {
+  .nav .nav-wrapper .display-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+@media (max-width: 830px) {
+  .nav .nav-wrapper .display-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+  }
+  .nav .nav-wrapper nav h1 {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 650px) {
+   .nav .nav-wrapper nav h1 {
+    font-size: 2.2rem;
+  }
+}
