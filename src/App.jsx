@@ -4,7 +4,7 @@ import "./setUp.scss";
 import "./Components/Fontawesome";
 import SignUp from "./Components/SignUp";
 import SignIn from "./Components/SignIn";
-import Home from "./Components/Home";
+import Nav from "./Components/Nav";
 import {
   BrowserRouter,
   BrowserRouter as Router,
@@ -21,7 +21,7 @@ function App() {
           <Routes>
             <Route path="/" element={<SignIn />} />
             <Route path="/Signup" element={<SignUp />} />
-            <Route path="/Home" element={<Home />} />
+            <Route path="/Home" element={<Nav />} />
           </Routes>
         </BrowserRouter>
       </AuthProvider>

@@ -7,7 +7,6 @@ import { AuthContext } from "../Contexts/AuthContext";
 import Priority from "./Priority";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import { useCallback } from "react";
 
 const Priorities = () => {
   const { currentUser } = useContext(AuthContext);

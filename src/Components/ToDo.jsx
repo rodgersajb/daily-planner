@@ -1,8 +1,8 @@
-import { useState, useContext, useEffect } from "react";
+import { useContext } from "react";
 import { db } from "./firebase";
-import { ref, update, onValue, set, remove } from "firebase/database";
+import { ref, remove } from "firebase/database";
 import { AuthContext } from "../Contexts/AuthContext";
-import { v4 as uuidv4 } from "uuid";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const ToDo = (props) => {
