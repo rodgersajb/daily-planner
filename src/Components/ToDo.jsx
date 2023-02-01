@@ -6,7 +6,6 @@ import { AuthContext } from "../Contexts/AuthContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const ToDo = (props) => {
-  console.log(props, "TO DO PROPS");
   const { currentUser } = useContext(AuthContext);
 
   const toDoRef = ref(db, `users/${currentUser.uid}/toDo/${props.id}`);

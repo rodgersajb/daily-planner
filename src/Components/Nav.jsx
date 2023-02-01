@@ -34,13 +34,11 @@ const Nav = () => {
       <section className="nav">
         <div className="nav-wrapper">
           <nav>
-            {/* <div className="dropdown-menu"> */}
             <div className="dropdown-content">
               <FontAwesomeIcon icon="fa-solid fa-user" />
               <p>{currentUser.email}</p>
               <button onClick={handleSignOut}>Sign Out</button>
             </div>
-            {/* </div> */}
 
             <h1>Daily Planner</h1>
 

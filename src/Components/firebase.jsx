@@ -1,18 +1,19 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getDatabase } from "firebase/database";
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBJ3D4L33cKHAWVR6a2IDZelfqYe21WV78",
-  authDomain: "daily-planner-f0433.firebaseapp.com",
-  databaseURL: "https://daily-planner-f0433-default-rtdb.firebaseio.com",
-  projectId: "daily-planner-f0433",
-  storageBucket: "daily-planner-f0433.appspot.com",
-  messagingSenderId: "1006470152796",
-  appId: "1:1006470152796:web:8065d2f0c45b67fe7adc99",
+  apiKey: import.meta.env.VITE_FIREBASE_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_DOMAIN,
+  databaseURL: import.meta.env.VITE_FIREBASE_DATABASE,
+  projectId: import.meta.env.VITE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
 // Initialize Firebase

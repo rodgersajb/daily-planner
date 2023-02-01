@@ -3,16 +3,8 @@ import { db } from "./firebase";
 import { ref, remove } from "firebase/database";
 import { AuthContext } from "../Contexts/AuthContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useDrag } from "react-dnd";
 
 const Priority = (props) => {
-
-  const [{isDragging}, drag] = useDrag(() => ({
-    type: 'priority',
-    collect: (monitor) => ({
-      isDragging: !!monitor.isDragging(),
-    })
-  }))
   const { currentUser } = useContext(AuthContext);
 
   const priorityRef = ref(
@@ -27,8 +19,7 @@ const Priority = (props) => {
   };
   return (
     <>
-      <div className="priority-entry"
-      drag={ref}>
+      <div className="priority-entry">
         <p>{props.description}</p>
         <div className="garbage">
           <FontAwesomeIcon onClick={handleDelete} icon="fa-solid fa-trash" />

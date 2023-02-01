@@ -16,7 +16,6 @@ const ToDoList = () => {
     const toDoListsRef = ref(db, `users/${currentUser.uid}/toDo`);
     onValue(toDoListsRef, (snapshot) => {
       const data = snapshot.val();
-      console.log(data, "DATA");
       const toDos = data
         ? Object.keys(data).map((key) => {
             return { id: key, ...data[key] };

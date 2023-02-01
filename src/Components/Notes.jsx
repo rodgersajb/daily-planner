@@ -16,7 +16,6 @@ const Notes = () => {
     const notesRef = ref(db, `users/${currentUser.uid}/notes`);
     onValue(notesRef, (snapshot) => {
       const data = snapshot.val();
-      console.log(data, "DATA");
       const notes = data
         ? Object.keys(data).map((key) => {
             return { id: key, ...data[key] };
